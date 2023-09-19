@@ -25,9 +25,15 @@ func ParseRoom(str string) *models.Room {
 func ParseRooms(rooms []string) []*models.Room {
 	var parsedRooms []*models.Room
 
-	for _, roomStr := range rooms {
+	for i, roomStr := range rooms {
 		room := ParseRoom(roomStr)
 		if room != nil {
+			if i == 0 {
+				room.IsStart = true
+			}
+			if i == len(rooms)-1 {
+				room.IsEnd = true
+			}
 			parsedRooms = append(parsedRooms, room)
 		}
 	}
