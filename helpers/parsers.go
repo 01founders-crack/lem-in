@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func parseRoom(str string) *models.Room {
+func ParseRoom(str string) *models.Room {
 	roomInfo := strings.Fields(str)
 	if len(roomInfo) == 3 {
 		x, _ := strconv.Atoi(roomInfo[1])
@@ -20,4 +20,17 @@ func parseRoom(str string) *models.Room {
 		}
 	}
 	return nil
+}
+
+func ParseRooms(rooms []string) []*models.Room {
+	var parsedRooms []*models.Room
+
+	for _, roomStr := range rooms {
+		room := ParseRoom(roomStr)
+		if room != nil {
+			parsedRooms = append(parsedRooms, room)
+		}
+	}
+
+	return parsedRooms
 }
