@@ -22,9 +22,16 @@ func TestGraph(t *testing.T) {
 	graph.AddRoom(g, room2)
 	graph.AddRoom(g, room3)
 
-	// Add Links between rooms
-	graph.AddLink(g, room1, room2)
-	graph.AddLink(g, room2, room3)
+	// Add Links between rooms based on room names
+	err := graph.AddLink(g, "Room1", "Room2")
+	if err != nil {
+		t.Errorf("Error adding link: %v", err)
+	}
+
+	err = graph.AddLink(g, "Room2", "Room3")
+	if err != nil {
+		t.Errorf("Error adding link: %v", err)
+	}
 
 	// Test if rooms were added
 	if len(g.Rooms) != 3 {

@@ -12,6 +12,6 @@ func AddRoom(graph *models.Graph, room *models.Room) {
 	graph.AddRoom(room)
 }
 
-func AddLink(graph *models.Graph, room1, room2 *models.Room) {
-	graph.AddLink(room1, room2)
+func AddLink(graph *models.Graph, roomName1, roomName2 string) error {
+	return graph.AddLink(roomName1, roomName2)
 }

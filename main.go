@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"lem-in/graph"
 	"lem-in/helpers"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -17,7 +19,16 @@ func main() {
 		}
 		defer file.Close()
 
-		helpers.ScanFileReturnAnts(file)
+		_, Rooms, Links := helpers.ScanFileReturnAnts(file)
+		graph1 := graph.NewGraph()
+		AllRooms := helpers.ParseRooms(Rooms)
+		for i := 0; i < len(AllRooms); i++ {
+			graph.AddRoom(graph1, AllRooms[i])
+		}
+		for i := 0; i < len(Links); i++ {
+			tempLink := strings.Split(Links[i], "-")
+			graph.AddLink(graph1, tempLink[0], tempLink[1])
+		}
+		fmt.Println(graph1)
 	}
-
 }

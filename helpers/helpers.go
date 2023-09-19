@@ -30,14 +30,14 @@ func ContainsSpace(s string) bool {
 	return false
 }
 
-func ScanFileReturnAnts(file *os.File)(int, [][]string, [][]string) {
+func ScanFileReturnAnts(file *os.File) (int, []string, []string) {
 	// Create a scanner to read lines from the file.
 	scanner := bufio.NewScanner(file)
-	var links [][]string
-	var rooms [][]string
-	var temprooms [][]string
-	var startRoom []string
-	var endRoom []string
+	var links []string
+	var rooms []string
+	var temprooms []string
+	var startRoom string
+	var endRoom string
 
 	TotalAnts := 0
 	mindex := 0         // Initialize line index
@@ -63,7 +63,7 @@ func ScanFileReturnAnts(file *os.File)(int, [][]string, [][]string) {
 			// For other lines, split them by '-' and print the parts.
 			parts := strings.Split(line, "-")
 			if len(parts) == 2 {
-				links = append(links, parts)
+				links = append(links, line)
 				fmt.Printf("From: %s, To: %s\n", parts[0], parts[1])
 			} else {
 				fmt.Println("Invalid line format:", line)
@@ -74,19 +74,18 @@ func ScanFileReturnAnts(file *os.File)(int, [][]string, [][]string) {
 				if IsStart {
 					IsStart = false
 					// add to the Start
-					startRoom = parts
+					startRoom = line
 					fmt.Printf("START FOUND Name: %s, X: %s, Y: %s\n", parts[0], parts[1], parts[2])
 				} else if IsEnd {
 					IsEnd = false
 					// add to the end
-					endRoom = parts
+					endRoom = line
 					fmt.Printf("END FOUND Name: %s, X: %s, Y: %s\n", parts[0], parts[1], parts[2])
 				} else {
 					// add to array
-					temprooms = append(temprooms, parts)
+					temprooms = append(temprooms, line)
 					fmt.Printf("Name: %s, X: %s, Y: %s\n", parts[0], parts[1], parts[2])
 				}
-
 			} else {
 				fmt.Println("Invalid line format:", line)
 			}
