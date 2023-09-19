@@ -1,8 +1,8 @@
 package models
 
 type Room struct {
-	name    string
-	x, y    int
-	isStart bool
-	isEnd   bool
+	Name    string
+	X, Y    int
+	IsStart bool
+	IsEnd   bool
 }
